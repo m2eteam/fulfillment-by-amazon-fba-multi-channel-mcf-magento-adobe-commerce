@@ -1,0 +1,21 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <css src="M2E_AmazonMcf::css/grid/view.css"/>
+    </head>
+
+    <body>
+        <referenceBlock name="menu">
+            <action method="setActive">
+                <argument name="itemId" xsi:type="string">M2E_AmazonMcf::general</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="M2E\AmazonMcf\Block\Adminhtml\ControlPanel\Open" name="m2e_amazonmcf_open_control_panel"/>
+            <uiComponent name="m2e_amazonmcf_product_grid"/>
+        </referenceContainer>
+    </body>
+
+</page>

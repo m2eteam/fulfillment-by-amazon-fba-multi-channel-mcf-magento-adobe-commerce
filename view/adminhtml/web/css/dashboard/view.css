@@ -1,0 +1,38 @@
+.card {
+    width: 15%;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 20px 20px 0;
+    border: solid 2px rgba(169, 167, 167, 0.64);
+    transition: border-radius 0.8s;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px;
+    height: 170px;
+    text-decoration: none;
+}
+
+.card > h3 {
+    margin-top: 20px;
+}
+
+.card > p {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 10% 0;
+}
+
+.order-card {
+    width: 17.3%;
+}
+
+.blank-list {
+    margin-left: 35px;
+}
+
+.blank-list > li {
+    margin-top: 5px;
+}
+
+.blank-text {
+    font-weight: 500;
+    font-size: 16px;
+}

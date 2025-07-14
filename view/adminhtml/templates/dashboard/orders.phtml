@@ -1,0 +1,31 @@
+<?php
+
+/** @var \M2E\AmazonMcf\Block\Adminhtml\Dashboard\Orders $block */
+
+?>
+
+<div class="dashboard-item">
+    <div class="dashboard-item-title"><?= /* @noEscape */ __('MCF Orders') ?></div>
+    <div class="dashboard-item-content">
+        <table class="admin__table-primary dashboard-data">
+            <thead>
+            <tr>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('Unshipped') ?></span></th>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('Shipped Today') ?></span></th>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('All Shipped') ?></span></th>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('Unprocessed') ?></span></th>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('Total') ?></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?= /* @noEscape */ $block->getCountOfUnshipped() ?></td>
+                <td><?= /* @noEscape */ $block->getCountOfShippedToday() ?></td>
+                <td><?= /* @noEscape */ $block->getCountOfAllShipped() ?></td>
+                <td><?= /* @noEscape */ $block->getCountOfSkipped() ?></td>
+                <td><?= /* @noEscape */ $block->getTotalCount() ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

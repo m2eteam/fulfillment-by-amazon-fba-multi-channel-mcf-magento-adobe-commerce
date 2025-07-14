@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Config\Model\Config">
+        <plugin name="amazonmcf_plugin_config_magento_config_model_config"
+                type="M2E\AmazonMcf\Plugin\Config\Magento\Config\Model\Config"/>
+    </type>
+
+    <!-- ControlPanel -->
+
+    <type name="M2E\Core\Model\ControlPanel\ExtensionCollection">
+        <arguments>
+            <argument name="extensions" xsi:type="array">
+                <item name="m2e_amazonmcf" xsi:type="object">M2E\AmazonMcf\Model\ControlPanel\Extension</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="M2E\Core\Model\ControlPanel\TabCollection">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="m2e_amazonmcf" xsi:type="object">M2E\AmazonMcf\Model\ControlPanel\TabProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="M2E\Core\Model\ControlPanel\OverviewWidgetCollection">
+        <arguments>
+            <argument name="widgetProviders" xsi:type="array">
+                <item name="m2e_amazonmcf" xsi:type="object">M2E\AmazonMcf\Model\ControlPanel\OverviewWidgetProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="M2E\Core\Model\ControlPanel\CronTaskCollection">
+        <arguments>
+            <argument name="taskProviders" xsi:type="array">
+                <item name="m2e_amazonmcf" xsi:type="object">M2E\AmazonMcf\Model\ControlPanel\CronTaskProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="M2E\Core\Model\ControlPanel\DatabaseRegistryCollection">
+        <arguments>
+            <argument name="registry" xsi:type="array">
+                <item name="m2e_amazonmcf" xsi:type="object">M2E\AmazonMcf\Model\ControlPanel\DatabaseRegistry</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

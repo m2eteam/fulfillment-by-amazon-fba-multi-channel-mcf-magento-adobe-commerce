@@ -1,0 +1,16 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+/** @var \M2E\AmazonMcf\Block\Adminhtml\PageHelpLink $block */
+
+?>
+
+<div class="AmazonMcf-page-help-link AmazonMcf-field-tooltip-to-right admin__field-tooltip">
+    <a class="admin__field-tooltip-action" href="<?php
+    /* @noEscape */ echo $block->getPageHelpLink(); ?>" target="_blank"></a>
+    <div class="admin__field-tooltip-content">
+        <?php
+        /* @noEscape */ echo $block->__('Click here to get help for this page.'); ?>
+    </div>
+</div>

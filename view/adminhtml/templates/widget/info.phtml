@@ -1,0 +1,86 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+/** @var \M2E\AmazonMcf\Block\Adminhtml\Widget\Info $block */
+?>
+
+<style type="text/css">
+
+    div.AmazonMcf-widget-info {
+        background: none repeat scroll 0 0 #FAFAFA !important;
+        border: 1px solid #D6D6D6 !important;
+        margin-bottom: 15px !important;
+        padding: 10px 15px !important;
+    }
+
+    div.AmazonMcf-widget-info label {
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    div.AmazonMcf-widget-info span.label {
+        font-weight: bold;
+    }
+
+    div.AmazonMcf-widget-info span.value {
+        color: #8e9393;
+    }
+
+    div.AmazonMcf-widget-info ul {
+        text-align: justify;
+        line-height: 0;
+        font-size: 1px;
+    }
+
+    div.AmazonMcf-widget-info ul:after {
+        width: 100%;
+        height: 0;
+        visibility: hidden;
+        overflow: hidden;
+        content: '';
+        display: inline-block;
+    }
+
+    div.AmazonMcf-widget-info ul li {
+        display: inline-block;
+        text-align: left;
+        line-height: normal;
+        font-size: 12px;
+        vertical-align: top;
+        max-width: 45%;
+    }
+
+    <?php foreach ($block->getInfo() as $index => $data) :?>
+    #
+    <?php /* @noEscape */ echo $block->getId() ?>
+    ul li:nth-child(<?php echo $index + 1; ?>) {
+        width: <?php /* @noEscape */ echo $block->getInfoPartWidth($index); ?>;
+        text-align: <?php /* @noEscape */ echo $block->getInfoPartAlign($index); ?>;
+    }
+
+    <?php endforeach; ?>
+
+</style>
+
+<div id="<?= /* @noEscape */ $block->getId() ?>" class="AmazonMcf-widget-info">
+    <ul>
+        <?php
+        foreach ($block->getInfo() as $index => $data) : ?>
+            <li>
+                <label>
+                <span class="label">
+                    <?= /* @noEscape */ $data['label']; ?>:&nbsp;
+                </span>
+                    <span class="value">
+                    <?= /* @noEscape */ $data['value']; ?>
+                </span>
+                </label>
+            </li>
+        <?php
+        endforeach; ?>
+    </ul>
+</div>

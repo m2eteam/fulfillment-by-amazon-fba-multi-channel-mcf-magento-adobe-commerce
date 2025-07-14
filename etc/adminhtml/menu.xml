@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+
+    <menu>
+        <add id="M2E_AmazonMcf::general" title="Amazon MCF" module="M2E_AmazonMcf" sortOrder="31" dependsOnModule="M2E_AmazonMcf"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+
+        <!-- dashboard -->
+
+        <add id="M2E_AmazonMcf::overview" module="M2E_AmazonMcf" sortOrder="5" parent="M2E_AmazonMcf::general"
+             title="Overview" resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+        <add id="M2E_AmazonMcf::amazon_overview_dashboard" title="Dashboard" module="M2E_AmazonMcf" sortOrder="10"
+             parent="M2E_AmazonMcf::overview" action="m2e_amazonmcf/dashboard/index"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+
+        <!-- products -->
+
+        <add id="M2E_AmazonMcf::products" title="Products" module="M2E_AmazonMcf" sortOrder="10"
+             parent="M2E_AmazonMcf::general" resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+        <add id="M2E_AmazonMcf::products_items" title="Items" module="M2E_AmazonMcf" sortOrder="10"
+             parent="M2E_AmazonMcf::products" action="m2e_amazonmcf/product/index"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+        <add id="M2E_AmazonMcf::products_logs" title="Logs &#38; Events" module="M2E_AmazonMcf" sortOrder="15"
+             parent="M2E_AmazonMcf::products" action="m2e_amazonmcf/product_log/index"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+
+        <!-- sales -->
+
+        <add id="M2E_AmazonMcf::sales" title="Sales" module="M2E_AmazonMcf" sortOrder="15" parent="M2E_AmazonMcf::general"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+        <add id="M2E_AmazonMcf::sales_orders" title="Orders" module="M2E_AmazonMcf" sortOrder="10"
+             parent="M2E_AmazonMcf::sales" action="m2e_amazonmcf/order/index"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+        <add id="M2E_AmazonMcf::sales_orders_logs" title="Logs &#38; Events" module="M2E_AmazonMcf" sortOrder="15"
+             parent="M2E_AmazonMcf::sales" action="m2e_amazonmcf/order_log/index"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+
+        <!-- settings -->
+
+        <add id="M2E_AmazonMcf::configuration" title="Configuration" module="M2E_AmazonMcf" sortOrder="20" parent="M2E_AmazonMcf::general"
+             resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+        <add id="M2E_AmazonMcf::settings" title="Settings" module="M2E_AmazonMcf" sortOrder="10" parent="M2E_AmazonMcf::configuration"
+             action="m2e_amazonmcf/settings/index" resource="M2E_AmazonMcf::amazonmcf_module_general"/>
+    </menu>
+
+</config>

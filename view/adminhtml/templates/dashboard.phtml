@@ -1,0 +1,36 @@
+<?php
+
+/** @var \M2E\AmazonMcf\Block\Adminhtml\Dashboard $block */
+
+?>
+
+<?php if ($block->isClean()): ?>
+    <h3>To start using MCF (Multi-Channel Fulfillment) module, please make sure that:</h3>
+    <ol class="blank-list blank-text">
+        <li>M2E Pro extension installed and registered in your Magento.</li>
+        <li>At least one Amazon channel account is connected to your M2E Pro. You can do this by navigating to <a href="<?= /* @noEscape */ $block->getM2EProAmazonAccountsUrl() ?>" target="_blank">Amazon > Configuration > Accounts</a>  section of your M2E Pro extension.</li>
+        <li>FBA to Magento Stock Synchronization option is enabled for this account. You can activate it in Amazon > Configuration > Accounts > FBA Inventory.</li>
+    </ol>
+    <p class="blank-text">If you need further assistance, feel free to reach out to our <a href="mailto: <?= /* @noEscape */ $block->getSupportEmail() ?>">Support Team</a>.</p>
+<?php else: ?>
+    <div class="dashboard-container row">
+        <div class="dashboard-main col-m-push-3 col-m-6">
+            <?= /* @noEscape */ $block->getProducts()->toHtml() ?>
+
+            <?= /* @noEscape */ $block->getOrders()->toHtml() ?>
+
+        </div>
+    </div>
+<?php endif ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+          "AmazonMcf/Account/Sync/ForceSync": {
+            "is_need_sync": <?= /* @noEscape */ json_encode($block->isNeedAccountForceSync()); ?>,
+            "url_for_sync": "<?= /* @noEscape */ $block->getUrlAccountForceSync(); ?>",
+            "url_settings": "<?= /* @noEscape */ $block->getUrlSettings(); ?>"
+          }
+        }
+    }
+</script>

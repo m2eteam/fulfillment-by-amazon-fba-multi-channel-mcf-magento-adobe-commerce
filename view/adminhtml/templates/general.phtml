@@ -1,0 +1,73 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+/** @var \M2E\AmazonMcf\Block\Adminhtml\General $block */
+
+?>
+
+<script>
+
+    <?php if ($block->getIsAjax()) : ?>
+    BlockNoticeObj.init(true);
+
+    <?php /* @noEscape */ echo
+        $block->jsPhp->render()
+        . $block->jsTranslator->render()
+        . $block->jsUrl->render()
+        . $block->js->render();
+    ?>
+
+    initializationCustomAttributeInputs();
+    initCollapsable();
+
+    <?php else: ?>
+    var BLOCK_NOTICES_SHOW = 'false';
+
+    var AmazonMcf = {};
+
+    require(['AmazonMcf/AmazonMcf', 'AmazonMcf/Plugin/Magento/AttributeCreator'], function (_AmazonMcf) {
+        AmazonMcf = _AmazonMcf;
+
+        // backward compatibility
+        AmazonMcf.text = {};
+        AmazonMcf.formData = {};
+        AmazonMcf.customData = {};
+
+        <?php /* @noEscape */ echo $block->jsPhp->render(); ?>
+        <?php /* @noEscape */ echo $block->jsTranslator->render(); ?>
+        <?php /* @noEscape */ echo $block->jsUrl->render(); ?>
+
+        window.CommonObj = new window.Common();
+        CommonObj.initCommonValidators();
+
+        window.BlockNoticeObj = new BlockNotice();
+        BlockNoticeObj.init();
+
+        <?php /* @noEscape */ echo $block->js->render(); ?>
+
+        window.initializationCustomAttributeInputs = function () {
+            $$('select.AmazonMcf-custom-attribute-can-be-created').each(function (selectObj) {
+
+                var handlerObj = new AttributeCreator(selectObj.id);
+                handlerObj.setSelectObj(selectObj);
+
+                if (handlerObj.alreadyHaveAddedOption()) {
+                    return true;
+                }
+
+                handlerObj.injectAddOption();
+            });
+        };
+
+        initializationCustomAttributeInputs();
+        initCollapsable();
+    });
+
+    <?php endif; ?>
+
+</script>
+
+<style type="text/css">
+    <?php /* @noEscape */ echo $block->css->render(); ?>
+</style>

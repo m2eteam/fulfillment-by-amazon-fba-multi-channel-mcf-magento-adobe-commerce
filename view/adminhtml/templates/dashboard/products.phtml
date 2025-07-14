@@ -1,0 +1,34 @@
+<?php
+
+/** @var \M2E\AmazonMcf\Block\Adminhtml\Dashboard\Products $block */
+
+?>
+
+<div class="dashboard-item">
+    <div class="dashboard-item-title"><?= /* @noEscape */ __('MCF Inventory') ?></div>
+
+    <div class="dashboard-item-content">
+        <table class="admin__table-primary dashboard-data">
+            <thead>
+            <tr>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('Amazon Merchant ID') ?></span></th>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('In Stock') ?></span></th>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('Enabled for MCF') ?></span></th>
+                <th class="data-grid-th"><span><?= /* @noEscape */ __('Total') ?></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($block->getRows() as $row): ?>
+                <tr>
+                    <td><?= /* @noEscape */ $row->getAccount()->getMerchantId() ?></td>
+                    <td><?= /* @noEscape */ $row->getCountOfAvailableItems() ?></td>
+                    <td><?= /* @noEscape */ $row->getCountOfEnabledItems() ?></td>
+                    <td><?= /* @noEscape */ $row->getCountOfTotalItems() ?></td>
+                </tr>
+            <?php
+            endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

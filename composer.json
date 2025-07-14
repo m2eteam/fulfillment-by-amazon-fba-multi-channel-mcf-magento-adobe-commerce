@@ -1,0 +1,35 @@
+{
+    "name": "m2e/fulfillment-by-amazon-fba-multi-channel-mcf-magento-adobe-commerce",
+    "description": "M2E Amazon Multi-Channel Fulfillment (MCF) is a Magento trusted extension that integrates your Adobe Commerce system with MCF, allowing sellers to use Amazon's Multi-Channel Fulfillment service to ship orders across various sales channels, not just Amazon",
+    "type": "magento2-module",
+    "version": "2.0.0",
+    "license": "proprietary",
+    "keywords": [
+        "magento",
+        "m2e",
+        "amazon mcf",
+        "ecommerce",
+        "amazon mcf magento 2",
+        "Fulfillment by Amazon (FBA)",
+        "Multi-Channel Fulfillment (MCF)",
+        "E-commerce Fulfillment Solutions",
+        "Cross-Channel Order Fulfillment"
+    ],
+    "homepage": "https://m2epro.com/amazon-mcf-magento2-extension",
+    "require": {
+        "php": ">=7.4",
+        "magento/module-inventory": ">=1.0",
+        "m2e/core": "^1.5.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "M2E\\AmazonMcf\\": ""
+        }
+    },
+    "suggest": {
+        "m2e/ebay-amazon-magento2": "M2E Pro extension must be installed before proceeding with installation of M2E Amazon MCF module."
+    }
+}

@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                m2e_amazonmcf_order_grid.m2e_amazonmcf_order_grid_data_source
+            </item>
+            <item name="deps" xsi:type="string">
+                m2e_amazonmcf_order_grid.m2e_amazonmcf_order_grid_source
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">m2e_amazonmcf_order_grid_columns</item>
+    </argument>
+
+    <dataSource name="m2e_amazonmcf_order_grid_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">M2E\AmazonMcf\UI\Order\DataProvider</argument>
+            <argument name="name" xsi:type="string">m2e_amazonmcf_order_grid_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" path="mui/index/render" xsi:type="url"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                        <item name="params" xsi:type="array">
+                            <item name="sorting" xsi:type="array">
+                                <item name="field" xsi:type="string">channel_purchase_date</item>
+                                <item name="direction" xsi:type="string">desc</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="filter_url_params" xsi:type="array">
+                        <item name="id" xsi:type="string">*</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <listingToolbar>
+        <filters name="listing_filters">
+            <filterSelect name="account_id"
+                          provider="${ $.parentName }"
+                          template="ui/grid/filters/elements/ui-select"
+                          component="Magento_Ui/js/form/element/ui-select">
+                <settings>
+                    <label>Merchant ID</label>
+                    <dataScope>account_id</dataScope>
+                    <options class="M2E\AmazonMcf\UI\Select\Account"/>
+                </settings>
+            </filterSelect>
+            <filterSelect name="show_skipped"
+                          provider="${ $.parentName }"
+                          component="Magento_Ui/js/form/element/select">
+                <settings>
+                    <label>Show Unprocessed Orders</label>
+                    <dataScope>show_skipped</dataScope>
+                    <options class="M2E\AmazonMcf\UI\Order\Select\ShowSkipped"/>
+                </settings>
+            </filterSelect>
+        </filters>
+        <bookmark name="bookmarks"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="m2e_amazonmcf_order_grid_columns">
+
+        <settings>
+            <childDefaults>
+                <param name="draggable" xsi:type="boolean">false</param>
+            </childDefaults>
+        </settings>
+
+        <column name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">ID</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="magento_order_increment_id" class="M2E\AmazonMcf\UI\Order\Column\MagentoIncrementId">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Magento Order ID</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="channel" class="M2E\AmazonMcf\UI\Order\Column\Channel">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Channel</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="channel_purchase_date" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Sale Date</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="component" xsi:type="string">M2E_AmazonMcf/js/Magento/Ui/Grid/Columns/date</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="shipping_date" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Shipping Date</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="component" xsi:type="string">M2E_AmazonMcf/js/Magento/Ui/Grid/Columns/date</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="items" class="M2E\AmazonMcf\UI\Order\Column\Items">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Items</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="status" class="M2E\AmazonMcf\UI\Order\Column\Status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Status</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+            </argument>
+            <settings>
+                <options class="M2E\AmazonMcf\UI\Order\Select\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+            </settings>
+        </column>
+
+        <column name="action" class="M2E\AmazonMcf\UI\Order\Column\Action">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Action</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                </item>
+            </argument>
+        </column>
+
+    </columns>
+</listing>

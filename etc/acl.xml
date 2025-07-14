@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+
+    <acl>
+
+        <resources>
+            <resource id="Magento_Backend::admin" title="Amazon MCF">
+                <resource id="M2E_AmazonMcf::system_configuration" title="Configuration" sortOrder="80">
+                    <resource id="M2E_AmazonMcf::amazonmcf_module" title="Module" sortOrder="10" >
+                        <resource id="M2E_AmazonMcf::amazonmcf_module_general" title="General" sortOrder="10"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+
+    </acl>
+
+</config>

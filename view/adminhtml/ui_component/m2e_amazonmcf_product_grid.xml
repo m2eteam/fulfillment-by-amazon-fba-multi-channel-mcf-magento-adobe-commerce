@@ -1,0 +1,214 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                m2e_amazonmcf_product_grid.m2e_amazonmcf_product_grid_data_source
+            </item>
+            <item name="deps" xsi:type="string">
+                m2e_amazonmcf_product_grid.m2e_amazonmcf_product_grid_source
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">m2e_amazonmcf_product_grid_columns</item>
+    </argument>
+
+    <dataSource name="m2e_amazonmcf_product_grid_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">
+                Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
+            </argument>
+            <argument name="name" xsi:type="string">m2e_amazonmcf_product_grid_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">product_id</argument>
+            <argument name="requestFieldName" xsi:type="string">product_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" path="mui/index/render" xsi:type="url"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">product_id</item>
+                    </item>
+                    <item name="filter_url_params" xsi:type="array">
+                        <item name="id" xsi:type="string">*</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <listingToolbar>
+        <filters name="listing_filters">
+
+            <filterInput name="name"
+                         provider="${ $.parentName }"
+                         template="ui/grid/filters/field">
+                <settings>
+                    <label>Product Title</label>
+                    <dataScope>name</dataScope>
+                    <dataType>text</dataType>
+                </settings>
+            </filterInput>
+
+            <filterInput name="product_magento_product_sku"
+                         provider="${ $.parentName }"
+                         template="ui/grid/filters/field">
+                <settings>
+                    <label>Product SKU</label>
+                    <dataScope>product_magento_product_sku</dataScope>
+                    <dataType>text</dataType>
+                </settings>
+            </filterInput>
+
+            <filterSelect name="account_id"
+                          provider="${ $.parentName }"
+                          template="ui/grid/filters/elements/ui-select"
+                          component="Magento_Ui/js/form/element/ui-select"
+            >
+                <settings>
+                    <label>Merchant ID</label>
+                    <dataScope>account_id</dataScope>
+                    <options class="M2E\AmazonMcf\UI\Select\Account"/>
+                </settings>
+            </filterSelect>
+
+        </filters>
+        <massaction name="listing_massaction" component="M2E_AmazonMcf/js/Magento/Ui/Grid/massactions">
+            <action name="enable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">enable</item>
+                        <item name="label" xsi:type="string" translate="true">Enable Products</item>
+                        <item name="url" xsi:type="url" path="m2e_amazonmcf/product_action/enable"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Confirmation</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">disable</item>
+                        <item name="label" xsi:type="string" translate="true">Disable Products</item>
+                        <item name="url" xsi:type="url" path="m2e_amazonmcf/product_action/disable"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Confirmation</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <bookmark name="bookmarks"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="m2e_amazonmcf_product_grid_columns">
+
+        <settings>
+            <childDefaults>
+                <param name="draggable" xsi:type="boolean">false</param>
+            </childDefaults>
+        </settings>
+
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">product_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+
+        <!--  column name from provider  -->
+        <column name="product_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">ID</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="entity_id" class="M2E\AmazonMcf\UI\Product\Column\MagentoProductId">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Product ID</item>
+                    <item name="fieldClass" xsi:type="string">a-right</item>
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="column_title" class="M2E\AmazonMcf\UI\Product\Column\Title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Product Title / Product SKU</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="product_channel_sku" class="M2E\AmazonMcf\UI\Product\Column\ChannelSku">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Channel SKU</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="product_qty" class="M2E\AmazonMcf\UI\Product\Column\Qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Available QTY</item>
+                    <item name="fieldClass" xsi:type="string">a-right</item>
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="product_asin" class="M2E\AmazonMcf\UI\Product\Column\Asin">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">ASIN / ISBN</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="product_is_enabled" class="M2E\AmazonMcf\UI\Product\Column\IsEnabled">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Status</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+            </argument>
+            <settings>
+                <options class="M2E\AmazonMcf\UI\Select\IsEnabled"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+            </settings>
+        </column>
+
+        <column name="action" class="M2E\AmazonMcf\UI\Product\Column\Action">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Action</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                </item>
+            </argument>
+        </column>
+
+    </columns>
+</listing>

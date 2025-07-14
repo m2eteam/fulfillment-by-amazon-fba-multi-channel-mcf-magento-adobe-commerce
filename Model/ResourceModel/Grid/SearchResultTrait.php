@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace M2E\AmazonMcf\Model\ResourceModel\Grid;
+
+trait SearchResultTrait
+{
+    private \Magento\Framework\Api\Search\AggregationInterface $aggregations;
+
+    public function setItems(?array $items = null)
+    {
+    }
+
+    public function getAggregations()
+    {
+        return $this->aggregations;
+    }
+
+    public function setAggregations($aggregations)
+    {
+        $this->aggregations = $aggregations;
+    }
+
+    public function getSearchCriteria()
+    {
+        return null;
+    }
+
+    public function setSearchCriteria(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
+    {
+        return $this;
+    }
+
+    public function setTotalCount($totalCount): self
+    {
+        return $this;
+    }
+
+    public function getTotalCount()
+    {
+        return $this->getSize();
+    }
+}
