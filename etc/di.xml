@@ -36,4 +36,11 @@
         </arguments>
     </type>
 
+    <!-- Shipping Tracker -->
+    <type name="Magento\Shipping\Block\Tracking\Popup">
+        <plugin name="m2e_amazonmcf_add_carrier_url"
+                type="M2E\AmazonMcf\Plugin\Block\Tracking\PopupPlugin"
+                sortOrder="10" />
+    </type>
+
 </config>

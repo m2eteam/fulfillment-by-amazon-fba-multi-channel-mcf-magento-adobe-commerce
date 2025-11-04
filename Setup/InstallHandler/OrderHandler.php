@@ -227,6 +227,12 @@ class OrderHandler implements \M2E\Core\Model\Setup\InstallHandlerInterface
             ['default' => null]
         );
         $orderItemTable->addColumn(
+            OrderItemResource::COLUMN_CARRIER_URL,
+            Table::TYPE_TEXT,
+            255,
+            ['default' => null]
+        );
+        $orderItemTable->addColumn(
             OrderItemResource::COLUMN_UPDATE_DATE,
             Table::TYPE_DATETIME,
             null,

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace M2E\AmazonMcf\Model\Order\StatusProcessor\PendingStatusProcessor;
 
+use M2E\AmazonMcf\Model\Magento\OrderItemProductType;
+
 class ShippingItemsCalculator
 {
     private \M2E\AmazonMcf\Model\Product\Repository $productRepository;
@@ -67,12 +69,9 @@ class ShippingItemsCalculator
         $shipmentItemProductIds = $this->getShipmentItemProductIds($magentoOrder);
 
         $magentoProductIds = [];
-        foreach ($magentoOrder->getItems() as $item) {
-            if ($item->getProduct() === null) {
-                continue;
-            }
-            if (!in_array($item->getProductId(), $shipmentItemProductIds)) {
-                $magentoProductIds[] = $item->getProductId();
+        foreach ($this->getOrderItemsProductIds($magentoOrder) as $productId) {
+            if (!in_array($productId, $shipmentItemProductIds)) {
+                $magentoProductIds[] = $productId;
             }
         }
 
@@ -124,5 +123,33 @@ class ShippingItemsCalculator
         }
 
         return $resultItems;
+    }
+
+    private function getOrderItemsProductIds(\Magento\Sales\Model\Order $magentoOrder): array
+    {
+        $productIds = [];
+        /** @var \Magento\Sales\Model\Order\Item $item */
+        foreach ($magentoOrder->getItems() as $item) {
+            if (OrderItemProductType::isSimple($item->getProductType())) {
+                if ($item->getProduct() === null) {
+                    continue;
+                }
+
+                $productIds[] = (int)$item->getProductId();
+            }
+
+            if (OrderItemProductType::isConfigurable($item->getProductType())) {
+                /** @var \Magento\Sales\Model\Order\Item $childrenItem */
+                foreach ($item->getChildrenItems() as $childrenItem) {
+                    if ($childrenItem->getProduct() === null) {
+                        continue;
+                    }
+
+                    $productIds[] = (int)$childrenItem->getProductId();
+                }
+            }
+        }
+
+        return array_unique($productIds);
     }
 }

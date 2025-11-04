@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace M2E\AmazonMcf\Model\Order\StatusProcessor;
 
+use M2E\AmazonMcf\Model\Magento\OrderItemProductType;
+
 class ShippedStatusProcessor
 {
     private \M2E\AmazonMcf\Model\Magento\Order\ShipOrderService $shipMagentoOrderService;
@@ -68,7 +70,7 @@ class ShippedStatusProcessor
         $shipmentItems = [];
         foreach ($order->getItems() as $orderItem) {
             $shipmentItems[] = new \M2E\AmazonMcf\Model\Magento\Order\ShipOrderService\ShipmentItem(
-                $orderItem->getMagentoOrderItemId(),
+                $this->selectMagentoOrderItemId($orderItem),
                 $orderItem->getQty(),
                 $orderItem->getTrackingNumber(),
                 $orderItem->isExistsCarrierCode() ? $orderItem->getCarrierCode() : null
@@ -76,6 +78,21 @@ class ShippedStatusProcessor
         }
 
         return $shipmentItems;
+    }
+
+    private function selectMagentoOrderItemId(\M2E\AmazonMcf\Model\Order\Item $orderItem): int
+    {
+        $magentoOrderItemId = $orderItem->getMagentoOrderItemId();
+        $parentItem = $orderItem->getMagentoOrderItem()->getParentItem();
+
+        if (
+            !empty($parentItem)
+            && OrderItemProductType::isConfigurable($parentItem->getProductType())
+        ) {
+            return (int)$parentItem->getItemId();
+        }
+
+        return $magentoOrderItemId;
     }
 
     private function skipOrder(string $warningMessage, \M2E\AmazonMcf\Model\Order $order): void

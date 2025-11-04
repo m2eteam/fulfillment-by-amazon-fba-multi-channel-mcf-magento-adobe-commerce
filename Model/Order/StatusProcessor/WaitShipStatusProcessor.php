@@ -84,6 +84,9 @@ class WaitShipStatusProcessor
         if ($carrierCode = $trackingData->retrieveCarrierCode()) {
             $orderItem->setCarrierCode($carrierCode);
         }
+        if ($carrierUrl = $trackingData->retrieveCarrierUrl()) {
+            $orderItem->setCarrierUrl($carrierUrl);
+        }
 
         $this->orderItemRepository->save($orderItem);
     }

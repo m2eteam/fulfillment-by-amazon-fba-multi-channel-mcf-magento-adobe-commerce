@@ -35,6 +35,9 @@ class Config implements \M2E\Core\Model\Setup\Upgrade\Entity\ConfigInterface
                 \M2E\AmazonMcf\Setup\Update\y25_m05\MigrateRegistryToCore::class,
                 \M2E\AmazonMcf\Setup\Update\y25_m05\AddWalmartChannel::class,
             ],
+            'y25_m10' => [
+                \M2E\AmazonMcf\Setup\Update\y25_m10\AddCarrierUrl::class
+            ],
         ];
     }
 }

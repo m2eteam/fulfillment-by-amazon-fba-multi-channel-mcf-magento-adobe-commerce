@@ -10,6 +10,7 @@ class Result
 
     private ?string $trackingNumber = null;
     private ?string $carrierCode = null;
+    private ?string $carrierUrl = null;
 
     public function retrieveTrackingNumber(): ?string
     {
@@ -29,5 +30,15 @@ class Result
     public function setCarrierCode(string $carrierCode): void
     {
         $this->carrierCode = $carrierCode;
+    }
+
+    public function retrieveCarrierUrl(): ?string
+    {
+        return $this->carrierUrl;
+    }
+
+    public function setCarrierUrl(string $carrierUrl)
+    {
+        $this->carrierUrl = $carrierUrl;
     }
 }

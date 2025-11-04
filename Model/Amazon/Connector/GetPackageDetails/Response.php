@@ -10,6 +10,7 @@ class Response implements \M2E\AmazonMcf\Model\Amazon\Connector\Response\Respons
 
     private ?string $trackingNumber = null;
     private ?string $carrierCode = null;
+    private ?string $carrierUrl = null;
 
     public function retrieveTrackingNumber(): ?string
     {
@@ -29,5 +30,15 @@ class Response implements \M2E\AmazonMcf\Model\Amazon\Connector\Response\Respons
     public function setCarrierCode(string $carrierCode): void
     {
         $this->carrierCode = $carrierCode;
+    }
+
+    public function retrieveCarrierUrl(): ?string
+    {
+        return $this->carrierUrl;
+    }
+
+    public function setCarrierUrl(string $carrierUrl): void
+    {
+        $this->carrierUrl = $carrierUrl;
     }
 }

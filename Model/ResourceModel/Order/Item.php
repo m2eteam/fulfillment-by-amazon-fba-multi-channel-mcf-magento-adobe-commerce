@@ -16,6 +16,7 @@ class Item extends \M2E\AmazonMcf\Model\ResourceModel\AbstractModel
     public const COLUMN_PACKAGE_NUMBER = 'package_number';
     public const COLUMN_TRACKING_NUMBER = 'tracking_number';
     public const COLUMN_CARRIER_CODE = 'carrier_code';
+    public const COLUMN_CARRIER_URL = 'carrier_url';
     public const COLUMN_UPDATE_DATE = 'update_date';
     public const COLUMN_CREATE_DATE = 'create_date';
 

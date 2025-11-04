@@ -149,6 +149,29 @@ class Item extends \Magento\Framework\Model\AbstractModel
 
     // ---------------------------------------
 
+    public function isExistsCarrierUrl(): bool
+    {
+        return !empty($this->getDataByKey(OrderItemResource::COLUMN_CARRIER_URL));
+    }
+
+    public function getCarrierUrl(): string
+    {
+        if (!$this->isExistsCarrierUrl()) {
+            throw new \LogicException('Carrier url does not exist');
+        }
+
+        return $this->getData(OrderItemResource::COLUMN_CARRIER_URL);
+    }
+
+    public function setCarrierUrl(string $carrierUrl): self
+    {
+        $this->setData(OrderItemResource::COLUMN_CARRIER_URL, $carrierUrl);
+
+        return $this;
+    }
+
+    // ----------------------------------------
+
     public function getMagentoOrderItem(): \Magento\Sales\Model\Order\Item
     {
         if ($this->magentoOrderItem !== null) {

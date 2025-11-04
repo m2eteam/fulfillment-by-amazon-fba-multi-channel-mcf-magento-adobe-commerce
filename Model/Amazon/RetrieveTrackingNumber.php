@@ -39,6 +39,10 @@ class RetrieveTrackingNumber
             $result->setCarrierCode($carrierCode);
         }
 
+        if ($carrierUrl = $response->retrieveCarrierUrl()) {
+            $result->setCarrierUrl($carrierUrl);
+        }
+
         return $result;
     }
 }
