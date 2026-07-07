@@ -18,6 +18,7 @@ class Request
         self::SHIPPING_SPEED_CATEGORY_SCHEDULED_DELIVERY,
     ];
 
+    private string $channel;
     private string $sellerFulfillmentId;
     private string $displayableOrderId;
     private string $displayableOrderComment;
@@ -28,6 +29,7 @@ class Request
     private array $items = [];
 
     public function __construct(
+        string $channel,
         string $sellerFulfillmentId,
         string $displayableOrderId,
         string $displayableOrderComment,
@@ -39,12 +41,18 @@ class Request
             throw new \LogicException('Invalid shipping speed category');
         }
 
+        $this->channel = $channel;
         $this->sellerFulfillmentId = $sellerFulfillmentId;
         $this->displayableOrderId = $displayableOrderId;
         $this->displayableOrderComment = $displayableOrderComment;
         $this->shippingSpeedCategory = $shippingSpeedCategory;
         $this->displayableOrderDate = $displayableOrderDate;
         $this->destinationAddress = $destinationAddress;
+    }
+
+    public function getChannel(): string
+    {
+        return $this->channel;
     }
 
     public function getSellerFulfillmentId(): string

@@ -23,6 +23,7 @@ class UpgradeCollection extends \M2E\Core\Model\Setup\AbstractUpgradeCollection
             '1.6.1' => ['to' => '2.0.0', 'upgrade' => \M2E\AmazonMcf\Setup\Upgrade\v2_0_0\Config::class],
             '2.0.0' => ['to' => '2.0.1', 'upgrade' => null],
             '2.0.1' => ['to' => '2.1.0', 'upgrade' => \M2E\AmazonMcf\Setup\Upgrade\v2_1_0\Config::class],
+            '2.1.0' => ['to' => '2.2.0', 'upgrade' => null],
         ];
     }
 

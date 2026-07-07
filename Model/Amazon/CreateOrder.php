@@ -68,6 +68,7 @@ class CreateOrder
         $destinationAddress = $this->createRequestDestinationAddress($magentoShippingAddress);
 
         $request = new Connector\CreateFulfillmentOrder\Request(
+            $order->getChannel(),
             $sellerFulfillmentId,
             $displayableOrderId,
             (string)__('Thank you for your order!'),
