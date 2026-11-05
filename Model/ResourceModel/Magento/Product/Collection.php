@@ -35,10 +35,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
         ?\Magento\Catalog\Model\Indexer\Category\Product\TableMaintainer $tableMaintainer = null,
         ?\Magento\Catalog\Model\Indexer\Product\Price\PriceTableResolver $priceTableResolver = null,
         ?\Magento\Framework\Indexer\DimensionFactory $dimensionFactory = null,
-        ?\Magento\Catalog\Model\ResourceModel\Category $categoryResourceModel = null,
-        ?\Magento\CatalogUrlRewrite\Model\Storage\DbStorage $urlFinder = null,
-        ?\Magento\Catalog\Model\Product\Gallery\ReadHandler $productGalleryReadHandler = null,
-        ?\Magento\Catalog\Model\ResourceModel\Product\Gallery $mediaGalleryResource = null
+        ?\Magento\Catalog\Model\ResourceModel\Category $categoryResourceModel = null
     ) {
         parent::__construct(
             $entityFactory,
@@ -66,10 +63,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
             $tableMaintainer,
             $priceTableResolver,
             $dimensionFactory,
-            $categoryResourceModel,
-            $urlFinder,
-            $productGalleryReadHandler,
-            $mediaGalleryResource
+            $categoryResourceModel
         );
 
         $this->stagingHelper = $stagingHelper;
